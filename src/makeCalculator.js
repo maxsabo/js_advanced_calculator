@@ -7,28 +7,36 @@ function makeCalculator() {
   return {
     result: 0,
 
-    add(a, b) {
-      return a + b;
+    add(number) {
+      this.result += number;
+
+      return this;
     },
 
-    subtract(a, b) {
-      return a - b;
+    subtract(number) {
+      this.result -= number;
+
+      return this;
     },
 
-    multiply(a, b) {
-      return a * b;
+    multiply(number) {
+      this.result *= number;
+
+      return this;
     },
 
-    divide(a, b) {
-      if (b === 0) {
-        return a;
+    divide(number) {
+      if (number === 0) {
+        this.result = 'infinity';
+      } else {
+        this.result /= number;
       }
 
-      return a / b;
+      return this;
     },
 
     operate(operation, number) {
-      this.result = operation(this.result, number);
+      operation.call(this, number);
 
       return this;
     },
